@@ -149,14 +149,14 @@ const Dashboard = () => {
                 <p className="text-sm text-muted-foreground text-center py-4">No registrations yet</p>
               ) : (
                 <div className="space-y-3">
-                  {registrations.slice(0, 5).map((r, i) => (
+                  {registrations.slice(0, 5).map((r) => (
                     <div key={r.id} className="flex items-center gap-2 text-sm">
                       <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-                        {(r.profiles?.full_name || "?")[0]}
+                        R
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">{r.profiles?.full_name || "User"}</div>
-                        <div className="text-xs text-muted-foreground truncate">{r.events?.title}</div>
+                        <div className="font-medium truncate">{r.events?.title || "Event"}</div>
+                        <div className="text-xs text-muted-foreground">Registered</div>
                       </div>
                     </div>
                   ))}
