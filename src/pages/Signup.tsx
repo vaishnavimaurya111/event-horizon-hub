@@ -18,7 +18,7 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const { error } = await signUp(form.email, form.password, form.name);
+    const { error } = await signUp(form.email, form.password, form.name, role);
     if (error) {
       setError(error.message);
       setLoading(false);
