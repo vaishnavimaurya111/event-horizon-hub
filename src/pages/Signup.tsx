@@ -43,6 +43,14 @@ const Signup = () => {
 
       {/* Right panel */}
       <div className="flex-1 flex items-center justify-center p-6 bg-background relative">
+        <div className="absolute top-4 left-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back
+          </button>
+        </div>
         <div className="absolute top-4 right-4">
           <ThemeToggle />
         </div>
