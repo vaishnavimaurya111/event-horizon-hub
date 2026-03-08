@@ -29,7 +29,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50/30 to-blue-50/40 dark:from-background dark:via-background dark:to-background">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/20">
       <Navbar />
       <div className="flex items-center justify-center px-4 pt-28 pb-16">
         <motion.div
