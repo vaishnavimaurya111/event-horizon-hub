@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/contexts/AuthContext";
