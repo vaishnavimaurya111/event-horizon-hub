@@ -64,39 +64,40 @@ const FeaturedEvents = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {events.map((e, i) => (
-            <motion.div
-              key={e.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group bg-card rounded-2xl border border-border overflow-hidden hover-lift cursor-pointer"
-            >
-              <div className={`h-32 bg-gradient-to-br ${e.color} relative`}>
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-xs font-medium">
-                  {e.category}
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="font-display font-bold text-lg mb-3 group-hover:text-primary transition-colors">
-                  {e.title}
-                </h3>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {e.date}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5" />
-                    {e.location}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-3.5 h-3.5" />
-                    {e.attendees} attendees
+            <Link to="/events" key={e.id}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group bg-card rounded-2xl border border-border overflow-hidden hover-lift cursor-pointer"
+              >
+                <div className={`h-32 bg-gradient-to-br ${e.color} relative`}>
+                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-xs font-medium">
+                    {e.category}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+                <div className="p-5">
+                  <h3 className="font-display font-bold text-lg mb-3 group-hover:text-primary transition-colors">
+                    {e.title}
+                  </h3>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {e.date}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {e.location}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-3.5 h-3.5" />
+                      {e.attendees} attendees
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
