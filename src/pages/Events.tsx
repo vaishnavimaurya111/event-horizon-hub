@@ -4,7 +4,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 const categories = ["All", "Technology", "Design", "Business", "AI / ML", "Entertainment", "Education", "Health", "Other"];
 
@@ -24,6 +27,10 @@ const Events = () => {
   const [cat, setCat] = useState("All");
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [myRegistrations, setMyRegistrations] = useState<string[]>([]);
+  const [registering, setRegistering] = useState<string | null>(null);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -37,6 +44,36 @@ const Events = () => {
     };
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    const fetchMyRegs = async () => {
+      if (!user) return;
+      const { data } = await supabase
+        .from("registrations")
+        .select("event_id")
+        .eq("user_id", user.id);
+      setMyRegistrations((data || []).map((r) => r.event_id));
+    };
+    fetchMyRegs();
+  }, [user]);
+
+  const handleRegister = async (eventId: string) => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    setRegistering(eventId);
+    const { error } = await supabase
+      .from("registrations")
+      .insert({ event_id: eventId, user_id: user.id });
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Registered successfully!");
+      setMyRegistrations((prev) => [...prev, eventId]);
+    }
+    setRegistering(null);
+  };
 
   const filtered = events.filter(
     (e) =>
@@ -81,6 +118,7 @@ const Events = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((e, i) => {
               const attendees = e.registrations?.[0]?.count || 0;
+              const isRegistered = myRegistrations.includes(e.id);
               return (
                 <motion.div key={e.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
@@ -107,8 +145,16 @@ const Events = () => {
                       {e.location && <div className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" />{e.location}</div>}
                       <div className="flex items-center gap-2"><Users className="w-3.5 h-3.5" />{attendees}{e.max_participants ? ` / ${e.max_participants}` : ""} registered</div>
                     </div>
-                    <button className="mt-4 w-full py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
-                      Register Now
+                    <button
+                      onClick={() => !isRegistered && handleRegister(e.id)}
+                      disabled={isRegistered || registering === e.id}
+                      className={`mt-4 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                        isRegistered
+                          ? "bg-secondary text-muted-foreground cursor-default"
+                          : "bg-primary text-primary-foreground hover:bg-primary/90"
+                      } disabled:opacity-60`}
+                    >
+                      {registering === e.id ? "Registering..." : isRegistered ? "✓ Registered" : "Register Now"}
                     </button>
                   </div>
                 </motion.div>
