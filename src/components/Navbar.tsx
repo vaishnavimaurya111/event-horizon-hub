@@ -9,12 +9,14 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
+
+  const dashboardPath = isAdmin ? "/admin" : "/participant";
 
   const links = [
     { to: "/", label: "Home" },
     { to: "/events", label: "Events" },
-    ...(user ? [{ to: "/dashboard", label: "Dashboard" }] : []),
+    ...(user ? [{ to: dashboardPath, label: isAdmin ? "Admin Panel" : "My Dashboard" }] : []),
   ];
 
   const handleSignOut = async () => {
