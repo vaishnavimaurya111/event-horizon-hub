@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Calendar, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Calendar, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const Signup = () => {
