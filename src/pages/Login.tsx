@@ -5,26 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/contexts/AuthContext";
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const { signUp } = useAuth();
+  const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const { error } = await signUp(form.email, form.password, form.name);
+    const { error } = await signIn(form.email, form.password);
     if (error) {
       setError(error.message);
       setLoading(false);
     } else {
-      setSuccess(true);
-      setLoading(false);
+      navigate("/dashboard");
     }
   };
 
@@ -40,9 +38,9 @@ const Signup = () => {
               </div>
               <span className="text-2xl font-display font-bold">Manageve</span>
             </div>
-            <h1 className="text-4xl font-display font-black mb-4">Start managing events effortlessly</h1>
+            <h1 className="text-4xl font-display font-black mb-4">Welcome back</h1>
             <p className="text-primary-foreground/70 leading-relaxed">
-              Create events, build teams, and keep everyone in the loop with smart notifications. Join 50,000+ organizers today.
+              Sign in to manage your events, track registrations, and keep your teams in sync.
             </p>
           </motion.div>
         </div>
@@ -69,18 +67,11 @@ const Signup = () => {
             <span className="text-xl font-display font-bold text-gradient">Manageve</span>
           </div>
 
-          <h2 className="text-2xl font-display font-bold mb-1">Create your account</h2>
+          <h2 className="text-2xl font-display font-bold mb-1">Sign in to your account</h2>
           <p className="text-muted-foreground text-sm mb-8">
-            Already have an account?{" "}
-            <Link to="/login" className="text-primary font-medium hover:underline">Sign in</Link>
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-primary font-medium hover:underline">Sign up</Link>
           </p>
-
-          {success && (
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-              className="mb-6 p-3 rounded-lg bg-primary/10 text-primary text-sm font-medium">
-              ✨ Account created! Check your email to confirm your account.
-            </motion.div>
-          )}
 
           {error && (
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
@@ -91,21 +82,12 @@ const Signup = () => {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium mb-1.5">Full Name</label>
-              <input
-                type="text" required value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
-                placeholder="John Doe" maxLength={100}
-              />
-            </div>
-            <div>
               <label className="block text-sm font-medium mb-1.5">Email</label>
               <input
                 type="email" required value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
-                placeholder="john@example.com" maxLength={255}
+                placeholder="john@example.com"
               />
             </div>
             <div>
@@ -115,7 +97,7 @@ const Signup = () => {
                   type={showPassword ? "text" : "password"} required value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition pr-12"
-                  placeholder="Min. 8 characters" minLength={8}
+                  placeholder="Your password"
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition">
@@ -124,19 +106,15 @@ const Signup = () => {
               </div>
             </div>
 
-            <button type="submit" disabled={loading || success}
+            <button type="submit" disabled={loading}
               className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50">
-              {loading ? "Creating account…" : <>Create Account <ArrowRight className="w-4 h-4" /></>}
+              {loading ? "Signing in…" : <>Sign In <ArrowRight className="w-4 h-4" /></>}
             </button>
           </form>
-
-          <p className="text-xs text-muted-foreground text-center mt-6">
-            By signing up, you agree to our Terms of Service and Privacy Policy.
-          </p>
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Login;
