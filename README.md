@@ -1,158 +1,98 @@
-ManageEve – Smart Event Management Platform
+# ManageEve – Smart Event Management Platform
 
 ManageEve is a modern web platform designed to simplify event creation, management, and participation. It enables organizers to host events, manage registrations, and track participants through an intuitive dashboard.
 
 Built with modern web technologies, ManageEve focuses on providing a smooth event management experience for both organizers and participants.
 
-🚀 Live Demo
+---
+
+## 🚀 Live Demo
 
 👉 https://manageeve.lovable.app
 
-📌 Problem
+---
+
+## 📌 Problem
 
 Managing events manually or using scattered tools can be difficult. Organizers often struggle with:
 
-Tracking registrations
-
-Managing participants
-
-Communicating updates
-
-Monitoring event analytics
+- Tracking registrations
+- Managing participants
+- Communicating updates
+- Monitoring event analytics
 
 Participants also face issues with complex registration processes and lack of event information.
 
-💡 Solution
+---
+
+## 💡 Solution
 
 ManageEve provides a centralized platform where organizers can easily create and manage events while participants can quickly discover and register for them.
 
-✨ Features
-👤 User Authentication
+---
 
-Secure login & signup
+## ✨ Features
 
-User profile management
+### 👤 User Authentication
 
-📅 Event Management
+- Secure login & signup
+- User profile management
 
-Create and publish events
+### 📅 Event Management
 
-Edit and delete events
+- Create and publish events
+- Edit and delete events
+- View upcoming events
 
-View upcoming events
+### 📝 Event Registration
 
-📝 Event Registration
+- Easy participant registration
+- Registration confirmation
 
-Easy participant registration
+### 📊 Admin Dashboard
 
-Registration confirmation
+- Track participants
+- Manage events
+- Monitor activity
 
-📊 Admin Dashboard
+### 🔔 Notifications & Updates
 
-Track participants
+- Event updates for participants
+- Real-time event information
 
-Manage events
+### 📱 Responsive UI
 
-Monitor activity
+- Mobile-friendly interface
+- Clean and modern design
 
-🔔 Notifications & Updates
+---
 
-Event updates for participants
+## 🏗️ Tech Stack
 
-Real-time event information
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- Tailwind CSS
 
-📱 Responsive UI
+### Backend
+- Supabase (Authentication & Database)
 
-Mobile-friendly interface
-
-Clean and modern design
-
-🏗️ Tech Stack
-
-Frontend
-
-HTML
-
-CSS
-
-JavaScript
-
-Tailwind CSS
-
-Backend
-
-Supabase (Authentication & Database)
-
-Deployment
-
-Lovable AI Builder
-
-Vercel / Cloud hosting
-
-AI Development
-
-Built using Lovable AI, a platform that lets developers build web apps by describing them with prompts.
+### Deployment
+- Lovable AI Builder
+- Vercel / Cloud hosting
 
 
-⚙️ Installation
 
-Clone the repository
+---
 
+#
+
+---
+
+## ⚙️ Installation
+
+### Clone the repository
+
+```bash
 git clone https://github.com/your-username/manageeve.git
-
-Go to project folder
-
-cd manageeve
-
-Install dependencies
-
-npm install
-
-Run the project
-
-npm run dev
-📂 Project Structure
-manageeve
-│
-├── public
-├── src
-│   ├── components
-│   ├── pages
-│   ├── styles
-│   └── utils
-│
-├── package.json
-└── README.md
-🎯 Future Improvements
-
-Payment integration for paid events
-
-QR code based event check-in
-
-Email notifications
-
-AI-based event recommendations
-
-Analytics dashboard
-
-🤝 Contributing
-
-Contributions are welcome.
-
-Fork the repository
-
-Create a new branch
-
-Make your changes
-
-Submit a pull request
-
-📜 License
-
-This project is licensed under the MIT License.
-
-👨‍💻 Author
-
-Developed by Vaishnavi
-
-If you like this project, please ⭐ the repository.
