@@ -35,7 +35,7 @@ const Dashboard = () => {
     if (eventIds.length > 0) {
       const { data: regs } = await supabase
         .from("registrations")
-        .select("*, profiles!registrations_user_id_fkey(full_name), events!registrations_event_id_fkey(title)")
+        .select("*, events(title)")
         .in("event_id", eventIds)
         .order("created_at", { ascending: false })
         .limit(10);
