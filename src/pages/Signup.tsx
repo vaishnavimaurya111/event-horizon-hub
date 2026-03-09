@@ -57,7 +57,7 @@ const Signup = () => {
               animate={{ opacity: 1, y: 0 }}
               className="mb-5 p-3 rounded-lg bg-primary/10 text-primary text-sm font-medium text-center"
             >
-              ✨ Account created! Check your email to confirm your account.
+              ✨ Account created! Go to Homepage.
             </motion.div>
           )}
 
